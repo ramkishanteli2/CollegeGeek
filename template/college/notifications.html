@@ -1,0 +1,30 @@
+{%extends 'college/base.html'%}
+{%load static%}
+{%block title%}
+Subjects
+{%endblock title%}
+
+{%block main%}
+<div class="row m-5">
+    <div class="col-md-4 col-sm-12">
+      <div class="list-group" id="list-tab" role="tablist">
+        <a class="list-group-item list-group-item-action active" id="list-home-list" data-bs-toggle="list" href="#list-home" role="tab" aria-controls="list-home">Official Notifications</a>
+      </div>
+    </div>
+    <div class="col-md-8 col-sm-12">
+      <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+            <div class="container w-100 border rounded" style="height: 80vh;background-color: rgb(229,221,213);overflow-y: scroll;">
+                {%for notification in notifications%}
+                <div class="d-flex flex-row-reverse">
+                    <div class="p-2 text-bold mt-5 mx-5" style="background-color: rgb(207,233,186);"><small>{{notification.datetime}}</small><br>
+                        {{notification.message}}
+                    </div>
+                </div>
+                {%endfor%}
+            </div>
+        </div>
+      </div>
+    </div>
+</div>
+{%endblock main%}

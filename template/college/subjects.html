@@ -1,0 +1,51 @@
+{%extends 'college/base.html'%}
+{%load static%}
+{%block title%}
+Subjects
+{%endblock title%}
+
+{%block main%}
+<div class="row m-5">
+    <div class="col-sm-12 col-md-4">
+      <div class="list-group" id="list-tab" role="tablist">
+        <a class="list-group-item list-group-item-action active" href="{%url 'subjects' semester%}" role="tab" aria-controls="list-home">Subjects</a>
+        <a class="list-group-item list-group-item-action" href="{%url 'classtimetable' semester %}" role="tab" aria-controls="list-profile">Classes Time Table</a>
+        <a class="list-group-item list-group-item-action"  href="{%url 'academiccalendar' semester%}" role="tab" aria-controls="list-messages">Academic Calendar</a>
+        <a class="list-group-item list-group-item-action"  href="{%url 'subjects' semester%}" role="tab" aria-controls="list-settings">Exam Section</a>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-8">
+      <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+            <table class="table table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Subject Code</th>
+                        <th>Subject Name</th>
+                        <th>Subject Instructor</th>
+                        <th>Compulsory/Elective</th>
+                        <th>Study Material</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {%for subject in subjects%}
+                    <tr>
+                        <td>{{subject.subjectcode}}</td>
+                        <td>{{subject.subjectname}}</td>
+                        <td>{{subject.instructorname}}</td>
+                        <td>{% if subject.compulsory %} Compulsory {%else%} Elective {%endif%}</td>
+                        <td>
+                            <a class="btn btn-warning" href="{%url 'material' subject.id%}" role="button">Link</a>
+                        </td>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+        <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">...</div>
+        <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">...</div>
+        <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">...</div>
+      </div>
+    </div>
+  </div>
+{%endblock main%}

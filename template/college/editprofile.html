@@ -1,0 +1,91 @@
+{%extends 'college/base.html'%}
+{%load static%}
+{%block title%}
+Profile
+{%endblock title%}
+
+{%block main%}
+{% if request.user.is_authenticated %}
+<div class="row p-5 w-100">
+    <div id="list-example" class="list-group col-sm-12 col-md-3 ms-5 border-end">
+        <div class="container">
+            <img class="container rounded-circle" {%if stud.profile_image %} src="{{stud.profile_image.url}}" {%else%} src="{%static 'college/images/profile/1.jpg'%}" {%endif%} alt="" height="200px" width="300px">
+        </div>
+        <h4 class="text-dark fw-bold" style="text-align: center;">{{request.user.first_name}}</h4>
+        <a class="list-group-item list-group-item-action rounded text-bold" style="text-align: center;" href="{%url 'profile'%}">Profile</a>
+        <a class="list-group-item list-group-item-action bg-primary rounded text-white" style="text-align: center;" href="{%url 'edit_profile'%}">Edit Profile</a>
+    </div>
+    <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" class="scrollspy-example col-sm-12 col-md-8 m-auto" tabindex="0">
+        <form action="{% url 'edit_profile' %}" method="POST" enctype="multipart/form-data">
+            {%csrf_token%}
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Name</label>
+              <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="name">
+            </div>
+            <div class="mb-3">
+                <label for="locality" class="form-label">Roll No.</label>
+                <input type="text" class="form-control" id="locality" aria-describedby="emailHelp" name="rollno">
+            </div>
+            <div class="mb-3">
+                <label for="locality" class="form-label">Current Semester</label>
+                <input type="number" class="form-control" aria-describedby="emailHelp" name="currentsem">
+            </div>
+            <div class="mb-3">
+                <label for="locality" class="form-label">Mobile No.</label>
+                <input type="text" class="form-control" id="mobile" aria-describedby="emailHelp" name="mobile">
+            </div>
+            <div class="mb-3">
+                <label for="street" class="form-label">Address</label>
+                <input type="text" class="form-control" id="street" aria-describedby="emailHelp" name="address">
+            </div>
+            <div class="mb-3">
+                <label for="city" class="form-label">City</label>
+                <input type="text" class="form-control" id="city" aria-describedby="emailHelp" required name="city">
+            </div>
+            <div class="mb-3">
+                <label for="street" class="form-label">State</label>
+                <select class="form-select w-auto" aria-label="Default select example" name="state">
+                    <option value="" selected>Select State</option>
+                    {%for state in states%}
+                    <option value="{{state}}">{{state}}</option>
+                    {%endfor%}
+                  </select>
+            </div>
+            <div class="mb-3">
+                <label for="pincode" class="form-label">Pincode</label>
+                <input style="width: 20%;" type="number" class="form-control" id="pincode" aria-describedby="emailHelp" name="pincode">
+            </div>
+            <div class="mb-3">
+                <label for="pincode" class="form-label">Skills/Projects</label>
+                <textarea class="form-control" aria-label="With textarea" name="skills"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="pincode" class="form-label">Tips For Juniors</label>
+                <textarea class="form-control" aria-label="With textarea" name="tips"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlFile1">Upload Profile Picture</label>
+                <input type="file" class="form-control-file" id="exampleFormControlFile1" name="profilepic">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            {% if messages %}
+            {%for message in messages%}
+                <small {% if message.tags%} class="text-white bg-{{message.tags}} align-middle w-100 p-2" {%endif%} style="text-align: center;">{{message}}</small>
+            {%endfor%}
+            {%endif%}
+          </form>
+    </div>
+</div>
+{% else %}
+<div class="container">
+  <div class="row my-3">
+      <div class="col-sm-6 offset-sm-3">
+          <p>
+            <h1 class="text-bold">Oops! you are not logged in.</h1> <br><br><br>
+            <img src="{% static 'college/images/error.gif'%}" alt="" height="200" width="200">  
+          </p>
+      </div>
+  </div>
+</div>
+{% endif %}
+{%endblock main%}

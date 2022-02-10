@@ -1,0 +1,117 @@
+{%extends 'college/base.html'%}
+{%load static%}
+{%block title%}
+Subjects
+{%endblock title%}
+
+{%block main%}
+<div class="row m-5">
+    <div class="col-sm-12 col-md-4">
+        <div class="list-group" id="list-tab" role="tablist">
+            <a class="list-group-item list-group-item-action" href="{%url 'subjects' semester %}" role="tab" aria-controls="list-home">Subjects</a>
+            <a class="list-group-item list-group-item-action active" href="{%url 'classtimetable' semester%}" role="tab" aria-controls="list-profile">Classes Time Table</a>
+            <a class="list-group-item list-group-item-action"  href="{%url 'academiccalendar' semester%}" role="tab" aria-controls="list-messages">Academic Calendar</a>
+            <a class="list-group-item list-group-item-action"  href="{%url 'subjects' semester%}" role="tab" aria-controls="list-settings">Exam Section</a>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-8">
+      <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+                <table class="table table-hover">
+                    <thead class="table-primary">
+                        <tr>
+                            <th>Day/Session</th>
+                            <th>I (M)<br>8:15 - 8:45</th>
+                            <th>II (A)<br>9:00 - 9:30</th>
+                            <th>III (B)<br>9:45 - 10:15</th>
+                            <th>IV (C)<br>10:30 - 11:00</th>
+                            <th>V (D)<br>11:15 - 11:45</th>
+                            <th>VI (E)<br>13:15 - 13:45</th>
+                            <th>VII (F)<br>14:00 - 14:30</th>
+                            <th>VIII (G)<br>14:45 - 15:15</th>
+                            <th>IX (H)<br>15:30 - 16:00</th>
+                            <th>X (OE)<br>16:15 - 16:45</th>
+                            <th>XI (OE)<br>17:00 - 17:30</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr id="Mon">
+                            <td class="day">Monday</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr id="Tues">
+                            <td class="day">Tuesday</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr id="Wed">
+                            <td class="day">Wednesday</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr id="Thur">
+                            <td class="day">Thursday</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr id="Fri">
+                            <td class="day">Friday</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+        </div>
+        <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">...</div>
+        <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">...</div>
+        <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">...</div>
+      </div>
+    </div>
+  </div>
+{%endblock main%}

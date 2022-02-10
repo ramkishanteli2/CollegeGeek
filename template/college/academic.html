@@ -1,0 +1,24 @@
+{%extends 'college/base.html'%}
+{%block title%}
+Academic
+{%endblock title%}
+
+{%block main%}
+<div class="container m-auto">
+    {%for semester in semesters%}
+    <div class="row my-5">
+        {%for clr in semester%}
+        <div class="col-sm-4">
+          <div class="card bg-{{clr.color}}">
+            <div class="card-body">
+              <h5 class="card-title">Semester {{clr.sem_no}}</h5>
+              <p class="card-text">{{course_name}}<br>({{branch_name}})</p>
+              <a href="{%url 'subjects' clr.sem_no%}" class="btn btn-primary">Check Resourses</a>
+            </div>
+          </div>
+        </div>
+        {%endfor%}
+    </div>
+    {%endfor%}
+</div>
+{%endblock main%}

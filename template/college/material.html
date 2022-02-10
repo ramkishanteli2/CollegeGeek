@@ -1,0 +1,45 @@
+{%extends 'college/base.html'%}
+{%load static%}
+{%block title%}
+Subjects
+{%endblock title%}
+
+{%block main%}
+<div class="row m-5">
+    <div class="col-sm-12 col-md-4">
+      <div class="list-group" id="list-tab" role="tablist">
+        <a class="list-group-item list-group-item-action active" href="{%url 'material' id%}" role="tab" aria-controls="list-home">{{subjectname}}</a>
+        <a class="list-group-item list-group-item-action" href="{%url 'subjects' semester%}" role="tab" aria-controls="list-home">Go Back</a>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-8">
+      <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+            <table class="table table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Id</th>
+                        <th>Title</th>
+                        <th>Download</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {%for material in materials%}
+                    <tr>
+                        <td>{{material.id}}</td>
+                        <td>{{material.title}}</td>
+                        <td>
+                            <a class="btn btn-warning" href="{{material.filefield.url}}" role="button" target="new">Get File</a>
+                        </td>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+        <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">...</div>
+        <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">...</div>
+        <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">...</div>
+      </div>
+    </div>
+  </div>
+{%endblock main%}

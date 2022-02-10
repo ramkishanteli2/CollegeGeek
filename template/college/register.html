@@ -1,0 +1,209 @@
+{%extends 'college/base.html'%}
+{%load static%}
+{%block title%}
+Register
+{%endblock title%}
+{%block internalcss%}
+<style>
+  body {
+    background-color: white;
+  }
+</style>
+{%endblock internalcss%}
+{%block main%}
+<section class="h-100">
+  <div class="container h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-12 col-xl-11">
+        <div class="card text-black" style="border-radius: 25px;">
+          <div class="card-body p-md-5">
+            <div class="row justify-content-center">
+              <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+
+                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
+                <p class="text-center mb-5 mx-1 mx-md-4 mt-4">
+                  {% if messages %}
+                  {%for message in messages%}
+                  <small {% if message.tags%} class="text-white bg-danger align-middle w-100 p-2" {%endif%}
+                    style="text-align: center;">{{message}}</small>
+                  {%endfor%}
+                  {%endif%}
+                </p>
+                <form class="mx-1 mx-md-4" method="POST" action="{%url 'register'%}" onsubmit="return validatePassword(this);">
+                  {% csrf_token %}
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input type="text" id="form3Example1c" class="form-control" name="username" required />
+                      <label class="form-label" for="form3Example1c">Username</label>
+                    </div>
+                  </div>
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input type="text" id="form3Example1c" class="form-control" name="name" required />
+                      <label class="form-label" for="form3Example1c">Your Name</label>
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input type="email" id="form3Example3c" class="form-control" name="email" required />
+                      <label class="form-label" for="form3Example3c">Your Email</label>
+                    </div>
+                  </div>
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <select class="form-select" aria-label="Default select example" name="college" id="college">
+                        <option selected>Select College</option>
+                        {%for college in colleges%}
+                        <option value="{{college.id}}" name="collegename">{{college.collegename}}</option>
+                        {%endfor%}
+                      </select>
+                    </div>
+                  </div>
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <select class="form-select" aria-label="Default select example" name="branch" id="branch">
+                        <option selected>Select Branch</option>
+                        {%for branch in branches%}
+                        <option value="{{college.collegeid}}">{{college.collegename}}</option>
+                        {%endfor%}
+                      </select>
+                    </div>
+                  </div>
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <select class="form-select" aria-label="Default select example" name="course" id="course">
+                        <option selected>Select Course</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input type="password" id="form3Example4c" class="form-control" name="password1" required />
+                      <label class="form-label" for="form3Example4c">Password</label>
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input type="password" id="form3Example4cd" class="form-control" name="password2" required />
+                      <label class="form-label" for="form3Example4cd">Repeat your password</label>
+                    </div>
+                  </div>
+
+                  <div class="form-check d-flex justify-content-center mb-5">
+                    <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3c" required />
+                    <label class="form-check-label" for="form2Example3">
+                      I agree all statements in <a href="#!">Terms of service</a>
+                    </label>
+                  </div>
+
+                  <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                    <input type="submit" class="btn btn-primary btn-lg" value="Register" id="user_register">
+                  </div>
+
+                </form>
+
+              </div>
+              <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+
+                <img src="{%static 'college/images/profile/draw1.png'%}" class="img-fluid" alt="Sample image">
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{%endblock main%}
+{%block customjs%}
+<script>
+  function validatePassword(form) {
+    if (form.password1.value.length < 8 || form.password1.value.length < 8) {
+      window.alert("Password length must be greater than 8!");
+      return false;
+    }
+    if (form.password1.value != form.password2.value) {
+      window.alert("Password did not match!");
+      return false;
+    }
+    return true;
+  }
+  //For updating branch
+  $("#college").change(function () {
+    console.log('changed!');
+    const collegeid = college.value;
+    const mydata = { college_id: collegeid }
+    $.ajax({
+      url: "{%url 'get_branches'%}",
+      type: "POST",
+      data: mydata,
+      success: function (data) {
+        var branch = document.getElementById('branch')
+        for (var i = 0; i < data.branches.length; i++) {
+          branch.innerHTML += "<option value=" + data.branches[i].branchname_id + ">" + data.branches[i].branchname + "</option>"
+        }
+      },
+      error: function (data) {
+        window.alert("Select correct college name!");
+      }
+    });
+  }
+  )
+  //for updating course
+  $("#branch").change(function () {
+    console.log('changed!');
+    const branchid = branch.value;
+    const mydata = { branch_id: branchid }
+    $.ajax({
+      url: "{%url 'get_courses'%}",
+      type: "POST",
+      data: mydata,
+      success: function (data) {
+        var course = document.getElementById('course')
+        // course.options.length = 0;
+        for (var i = 0; i < data.courses.length; i++) {
+          course.innerHTML += "<option value=" + data.courses[i].id + ">" + data.courses[i].coursename + "</option>"
+        }
+      },
+      error: function (data) {
+        window.alert("Select correct branch name!");
+      }
+    });
+  }
+  )
+  // const college = document.getElementById('college');
+  // college.addEventListener('change',makerequest);
+  // function makerequest(){
+  //   const xhr = new XMLHttpRequest();
+  //   const collegeid = college.value;
+  //   console.log(collegeid)
+  //   xhr.open('POST',"{%url 'get_branches'%}",true)
+  //   xhr.responseType= 'json';
+  //   xhr.onload = function (){
+  //     if(xhr.status === 200)
+  //     {
+  //       console.log(xhr.response)
+  //       // document.getElementById('html').innerHTML=xhr.response.getElementById('html').innerHTML;
+  //     }
+  //     else
+  //     {
+  //       window.alert("Error Accured!");
+  //     }
+  //   }
+  //   mydata = {"status":"Success"}
+  //   console.log(mydata)
+  //   xhr.send(mydata);
+  // }
+</script>
+{%endblock customjs%}
