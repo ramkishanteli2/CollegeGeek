@@ -98,13 +98,13 @@ def create_student(request, email_, college, course, name):
     stu.collegename = College.objects.get(id=int(college))
     stu.course = Course.objects.get(id=int(course))
     stu.save()
-    send_mail(
-        'Account created successfully!',
-        f'Welcome to CollegeGeek {user.first_name}!. \n Your account has been created successfully. \n Email: {user.email} \n Happy Learning! \n Regards CollegeGeek Developer Team',
-        settings.EMAIL_HOST_USER,
-        [str(user.email)],
-        fail_silently=False,
-    )
+    # send_mail(
+    #     'Account created successfully!',
+    #     f'Welcome to CollegeGeek {user.first_name}!. \n Your account has been created successfully. \n Email: {user.email} \n Happy Learning! \n Regards CollegeGeek Developer Team',
+    #     settings.EMAIL_HOST_USER,
+    #     [str(user.email)],
+    #     fail_silently=False,
+    # )
     return redirect('login')
 
 
