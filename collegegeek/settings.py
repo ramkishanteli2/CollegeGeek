@@ -15,8 +15,8 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-TEMPLATE_DIR = os.path.join(BASE_DIR,'template')
-STATIC_DIR = os.path.join(BASE_DIR,'static')
+TEMPLATE_DIR = os.path.join(BASE_DIR, 'template')
+STATIC_DIR = os.path.join(BASE_DIR, 'static')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-$62!gwj3i&w1fwq957hc4@w)ozki32wd#m^pf#ay!*tpi+e*n-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -86,7 +86,9 @@ DATABASES = {
 
         'PASSWORD': 'admin',
 
-        'HOST': 'localhost',
+        'HOST': '127.0.0.1',
+
+        'PORT': '5432'
     }
 }
 
@@ -139,7 +141,7 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
 
-#URL for all media file in our project
+# URL for all media file in our project
 MEDIA_ROOT = BASE_DIR / 'media'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
