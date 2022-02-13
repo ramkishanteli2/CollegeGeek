@@ -1,0 +1,121 @@
+{%extends 'coding/base.html'%}
+
+
+{%block internalcss%}
+<style>
+    #article_heading {
+        text-decoration: none;
+        color: black;
+    }
+
+    #article_heading:hover {
+        text-decoration: underline;
+        color: black;
+    }
+</style>
+{%endblock internalcss%}
+
+
+
+{%block main%}
+{%block blog%}
+<div class="container bg-white">
+    <div class="row">
+        <div class="col-8">
+            <h2 class="mt-3">Data Structures and Algorithm</h2>
+            <hr>
+            <div class="article">
+                <span>{{article.publish_date}}</span>
+                <span>| {{article.category.category_name}}</span>
+                <a href="" id="article_heading">
+                    <h3>{{article.article_heading}}</h3>
+                </a>
+            </div>
+            <hr>
+            <!--Problem Statement-->
+            <h4>Probelm Statement:</h4>
+            <p>
+                You are given a 0-indexed array nums consisting of n positive integers. <br>The array nums is called
+                alternating if:
+            <ul>
+                <li>nums[i - 2] == nums[i], where 2 &lt;= i &lt;=n - 1.</li>
+                <li>nums[i - 1] != nums[i], where 1 &lt;= i &lt;=n - 1.</li>
+            </ul>In one operation, you can choose an index i and change nums[i] into any positive integer. <br>Return
+            the
+            minimum number of operations required to make the array alternating.
+            </p>
+            <!--Dry Run-->
+            <h4>Dry Run:</h4>
+            <ul>
+                <li></li>
+                <li></li>
+            </ul>
+            <!--Approch-->
+            <h4>Approch:</h4>
+            <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+            <!--Code-->
+            <h4>Code:</h4>
+            <pre>
+                <code>
+                    class Solution {
+                        public:
+                            int minimumOperations(vector&lt;int>& nums) {
+                                unordered_map&lt;int,int>mp;
+                                unordered_map&lt;int,int>temp;
+                                priority_queue&lt;pair<int,int>>pq;
+                                int ans = INT_MAX;
+                                int count1 = 0;
+                                int count = 0;
+                                for(int i = 0;i&lt;nums.size();i+=2){
+                                    mp[nums[i]]++;
+                                    count+=1;
+                                }
+                                for(int i = 1;i&lt;nums.size();i+=2){
+                                    temp[nums[i]]++;
+                                    count1+=1;
+                                }
+                                for(auto item:temp){
+                                    pq.push({item.second,item.first});
+                                }
+                                for(int i=0;i&lt;nums.size();i+=2){
+                                    int temp=count-mp[nums[i]];
+                                    if(!pq.empty() and pq.top().second!=nums[i]){
+                                        temp+=count1-pq.top().first;
+                                    }else if(!pq.empty()){
+                                        auto item = pq.top();
+                                        pq.pop();
+                                        if(!pq.empty()){
+                                            temp+=count1-pq.top().first;
+                                        }else{
+                                            temp+=count1;
+                                        }
+                                        pq.push(item);
+                                    }
+                                    ans=min(ans,temp);
+                                }
+                                return ans;
+                            }
+                        };
+                </code>
+            </pre>
+            <!--Outut-->
+            <h4>Output:</h4>
+            <ul>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+        <div class="col-4">
+
+        </div>
+    </div>
+</div>
+{%endblock blog%}
+{%endblock main%}
